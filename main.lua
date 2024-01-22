@@ -53,14 +53,14 @@ end
 function love.update(dt)
     -- player 1
     if love.keyboard.isDown('w') then
-        player1Y = math.max(0, player1Y + -PADDLE_SPEED * dt)
+        player1Y = math.max(0, player1Y - PADDLE_SPEED * dt)
     elseif love.keyboard.isDown('s') then
         player1Y = math.min(VIRTUAL_HEIGHT - 20, player1Y + PADDLE_SPEED * dt)
     end
 
     -- player 2
     if love.keyboard.isDown('up') then
-        player2Y = math.max(0, player2Y + -PADDLE_SPEED * dt)
+        player2Y = math.max(0, player2Y - PADDLE_SPEED * dt)
     elseif love.keyboard.isDown('down') then
         player2Y = math.min(VIRTUAL_HEIGHT - 20, player2Y + PADDLE_SPEED * dt)
     end
@@ -96,22 +96,21 @@ function love.draw()
 
     -- Display welcome/header text
     love.graphics.setFont(smallFont)
-
     if gameState == 'start' then
         love.graphics.printf('Hello Start State!', 0, 20, VIRTUAL_WIDTH, 'center')
     else
         love.graphics.printf('Hello Play State!', 0, 20, VIRTUAL_WIDTH, 'center')
     end
 
+    -- Display scores
     love.graphics.setFont(scoreFont)
-    -- Display player 1 score
+    -- Player 1
     love.graphics.print(tostring(player1Score), VIRTUAL_WIDTH / 2 - 50, VIRTUAL_HEIGHT / 3)
-    -- Display player 2 score
+    -- Player 2
     love.graphics.print(tostring(player2Score), VIRTUAL_WIDTH / 2 + 30, VIRTUAL_HEIGHT / 3)
     
     -- Display player 1 paddle
     love.graphics.rectangle('fill', 10, player1Y, 5, 20)
-
     -- Display player 2 paddle
     love.graphics.rectangle('fill', VIRTUAL_WIDTH - 10, player2Y, 5, 20)
 
